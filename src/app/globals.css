@@ -9,6 +9,16 @@
 @layer components {
   .scramble-text {
     animation: scramble 0.3s infinite;
+  .animate-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  @keyframes ping {
+    75%, 100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
   }
   @keyframes scramble {
     0% { text-shadow: 0 0 10px rgba(0,255,0,0.8); transform: translate(0, 0); }

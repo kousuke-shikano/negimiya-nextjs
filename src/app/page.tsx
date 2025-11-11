@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import { Suspense } from 'react';
 import Loading from './loading';
@@ -134,17 +135,18 @@ export default function Home() {
         </section>
 
         {/* ちびみやクリック効果（JS移植） */}
-        <div className="fixed bottom-4 right-4 z-40">
+        <div
+          className="fixed bottom-6 right-6 z-50 cursor-pointer"
+          onClick={() => {
+            alert('ちびみやが飛び散った！かわいい！');
+          }}
+        >
           <Image
             src="/chibi-miya.png"
             alt="ちびみや"
             width={80}
             height={80}
-            className="chibi-click rounded-full drop-shadow-lg"
-            onClick={() => {
-              // 飛び散りアニメ（後でFramer Motionで強化）
-              alert('ちびみやが飛び散った！かわいい！');
-            }}
+            className="rounded-full drop-shadow-2xl hover:scale-110 transition-transform"
           />
         </div>
       </main>
