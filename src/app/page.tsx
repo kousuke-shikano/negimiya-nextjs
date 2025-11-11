@@ -1,27 +1,13 @@
 'use client'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import Header from '@/components/Header'
 
 export default function Home() {
   return (
     <>
-      {/* ヘッダー */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-8 py-6 transition-all duration-500">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-2xl md:text-3xl font-bold text-accent">葱野みやファンサイト</h1>
-          <nav className="hidden md:flex gap-10">
-            {['活動内容', '投稿動画', 'NEWS', 'Links'].map((item) => (
-              <a
-                key={item}
-                href={`#${item}`}
-                className="text-accent-light hover:text-accent transition-all duration-300 font-medium text-lg tracking-wide"
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
-        </div>
-      </header>
+    <Header />
+
 
       {/* ヒーローセクション */}
       <section className="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
