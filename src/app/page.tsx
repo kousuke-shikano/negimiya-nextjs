@@ -1,4 +1,6 @@
 'use client';
+
+import ChibiMiyaExplosion from '@/components/chibimiya-explosion';  // ← これだけ注意
 import Image from 'next/image';
 import { Suspense } from 'react';
 import Loading from './loading';
@@ -6,7 +8,7 @@ import Loading from './loading';
 export default function Home() {
   return (
     <Suspense fallback={<Loading />}>
-      <main className="min-h-screen bg-black text-white overflow-x-hidden">
+      <main className="min-h-screen bg-gradient-to-br from-purple-900 to-black text-white">
         {/* ヘッダー（固定 + ハンバーガーメニュー対応） */}
         <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md px-6 py-4">
           <div className="container mx-auto text-center">
@@ -134,21 +136,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ちびみやクリック効果（JS移植） */}
-        <div
-          className="fixed bottom-6 right-6 z-50 cursor-pointer"
-          onClick={() => {
-            alert('ちびみやが飛び散った！かわいい！');
-          }}
-        >
-          <Image
-            src="/chibi-miya.png"
-            alt="ちびみや"
-            width={80}
-            height={80}
-            className="rounded-full drop-shadow-2xl hover:scale-110 transition-transform"
-          />
-        </div>
+        <ChibiMiyaExplosion />
       </main>
     </Suspense>
   );
