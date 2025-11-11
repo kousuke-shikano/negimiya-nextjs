@@ -1,143 +1,185 @@
-'use client';
-
-import ChibiMiyaExplosion from '@/components/chibimiya-explosion';  // ← これだけ注意
-import Image from 'next/image';
-import { Suspense } from 'react';
-import Loading from './loading';
+'use client'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 export default function Home() {
   return (
-    <Suspense fallback={<Loading />}>
-      <main className="min-h-screen bg-gradient-to-br from-purple-900 to-black text-white">
-        {/* ヘッダー（固定 + ハンバーガーメニュー対応） */}
-        <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md px-6 py-4">
-          <div className="container mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-wider text-green-400 scramble-text">
-              葱野みやファンサイト｜Vtuber・ゲーム実況・歌ってみた
-            </h1>
-          </div>
-        </header>
+    <>
+      {/* ヘッダー */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-8 py-6 transition-all duration-500">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <h1 className="text-2xl md:text-3xl font-bold text-accent">葱野みやファンサイト</h1>
+          <nav className="hidden md:flex gap-10">
+            {['活動内容', '投稿動画', 'NEWS', 'Links'].map((item) => (
+              <a
+                key={item}
+                href={`#${item}`}
+                className="text-accent-light hover:text-accent transition-all duration-300 font-medium text-lg tracking-wide"
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </header>
 
-        {/* 第1パララックス + 葱野みやとは？ */}
-        <section className="relative h-screen flex items-center justify-center pt-20 parallax-bg" style={{ backgroundImage: "url('/parallax1.jpg')" }}>
-          <div className="absolute inset-0 opacity-30">
-            <Image src="/parallax1.jpg" alt="パララックス1" fill className="object-cover" />
-          </div>
-          <div className="relative z-10 text-center">
-            <h2 className="text-8xl font-black text-green-400 drop-shadow-2xl">葱野みやとは？</h2>
-            <p className="mt-8 text-2xl max-w-2xl mx-auto">
-              # セルフ受肉系Vtuber個人勢(*'▽'*)<br />
-              好きなものはネギとアニメとねこ！<br />
-              このサイトは葱野みやのファンが勝手に作ったネタサイトです。
-            </p>
-            <a
-              href="https://www.youtube.com/@negimiya" // 実際URLに
-              className="inline-block mt-8 px-8 py-4 bg-red-600 hover:bg-red-700 rounded-full text-xl font-bold transition-all"
-            >
-              YouTubeチャンネルへ
-            </a>
-          </div>
-        </section>
+      {/* ヒーローセクション */}
+      <section className="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+        <motion.div
+          className="glass max-w-5xl mx-auto text-center px-8 py-24 rounded-3xl shadow-2xl relative z-10"
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        >
+          <motion.h2
+            className="text-3xl md:text-5xl font-bold text-accent-light mb-8"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            葱野みやとは？
+          </motion.h2>
 
-        {/* 活動内容セクション */}
-        <section className="py-20">
-          <div className="container mx-auto px-6">
-            <h2 className="text-5xl font-bold text-center mb-16 text-green-400">↓活動内容↓</h2>
-            
-            {/* Vtuber活動 */}
-            <div className="grid md:grid-cols-3 gap-12 mb-20">
-              <div className="text-center">
-                <h3 className="text-3xl font-bold mb-4">Vtuber活動</h3>
-                <p className="text-lg opacity-90">
-                  葱野みやは、2021年にデビューしたバーチャルYouTuber（Vtuber）です。彼女は主にゲーム実況や歌ってみた動画を投稿しており、その明るい性格と魅力的な声で多くのファンを獲得しています。...（続きは元のHTMLからコピー）
-                </p>
-              </div>
-              
-              {/* イラストレーター */}
-              <div className="text-center">
-                <h3 className="text-3xl font-bold mb-4">イラストレーター</h3>
-                <p className="text-lg opacity-90">イラストレーターとしても活動しており、...（続きコピー）</p>
-              </div>
-              
-              {/* うたってみた */}
-              <div className="text-center">
-                <h3 className="text-3xl font-bold mb-4">うたってみた</h3>
-                <p className="text-lg opacity-90">葱野みやは、歌ってみた動画も人気があります。...（続きコピー）</p>
-              </div>
-            </div>
-          </div>
-        </section>
+          <motion.h1
+            className="text-5xl md:text-8xl font-black text-accent leading-tight mb-10"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6, duration: 1.2 }}
+            style={{ textShadow: "0 10px 30px rgba(76,175,80,0.3)" }}
+          >
+            セルフ受肉系Vtuber個人勢<br />
+            好きなものは<br />
+            ネギとアニメとねこ！
+          </motion.h1>
 
-        {/* 第2パララックス */}
-        <section className="relative h-screen flex items-center justify-center parallax-bg" style={{ backgroundImage: "url('/parallax2.jpg')" }}>
-          <div className="absolute inset-0 opacity-30">
-            <Image src="/parallax2.jpg" alt="パララックス2" fill className="object-cover" />
-          </div>
-          <div className="relative z-10 text-center">
-            <h2 className="text-4xl font-bold">↓動画・アーカイブ↓</h2>
-          </div>
-        </section>
+          <motion.p
+            className="text-lg md:text-2xl mb-16 opacity-90 font-medium"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.9 }}
+            transition={{ delay: 1.2 }}
+          >
+            このサイトは葱野みやのファンが勝手に作ったネタサイトです。
+          </motion.p>
 
-        {/* 動画アーカイブセクション */}
-        <section className="py-20 container mx-auto px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {/* ハロウィン×グミ */}
-            <div className="bg-green-900/20 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold mb-4">ハロウィン×グミ＝お祭り</h3>
-              <p>25種類のグミを使ってハロウィンパーティーを開催！...（続きコピー）</p>
-              <Image src="/gumi-thumb.jpg" alt="グミ" width={300} height={200} className="mt-4 rounded" />
-            </div>
-            
-            {/* アルピニストとしてのプライド */}
-            <div className="bg-green-900/20 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold mb-4">アルピニストとしてのプライド</h3>
-              <p>登山ゲーム「PEAK」を...（続き）</p>
-            </div>
-            
-            {/* 食事を楽しみましょう */}
-            <div className="bg-green-900/20 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold mb-4">食事を楽しみましょう</h3>
-              <p>葱野みやは、食事を楽しむことも大好きです。...（続き）</p>
-            </div>
-            
-            {/* 悲鳴はリスナーの栄養 */}
-            <div className="bg-green-900/20 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold mb-4">悲鳴はリスナーの栄養</h3>
-              <p>葱野みやは、ホラー実況も得意としています。...（続き）</p>
-            </div>
-            
-            {/* 心の葛藤 */}
-            <div className="bg-green-900/20 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold mb-4">心の葛藤</h3>
-              <p>葱野みやは、活動を続けていく中で、心の葛藤を抱えることもあります。...（続き）</p>
-            </div>
-            
-            {/* 伸びろーッ！ */}
-            <div className="bg-green-900/20 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold mb-4">「伸びろーッ！」</h3>
-              <p>（続きコピー）</p>
-            </div>
-          </div>
-        </section>
+          <motion.a
+            href="https://www.youtube.com/@葱野みや"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-14 py-6 bg-red-600 text-white font-bold text-xl rounded-full shadow-2xl"
+            whileHover={{ scale: 1.1, backgroundColor: "#dc2626" }}
+            whileTap={{ scale: 0.95 }}  /* ← ここを直した！！ */
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.4 }}
+          >
+            YouTubeチャンネルへ
+          </motion.a>
+        </motion.div>
 
-        {/* NEWSセクション（Markdown化準備） */}
-        <section className="py-20 bg-black/50">
-          <div className="container mx-auto px-6">
-            <h2 className="text-5xl font-bold text-center mb-12 text-green-400">NEWS</h2>
-            <ul className="space-y-4 max-w-2xl mx-auto">
-              <li className="border-l-4 border-green-400 pl-4">
-                <strong>2025.11.03</strong> ・配信追加しました グミ配信を追加しました ・文化の日なので文化的にコードをいじる
-              </li>
-              <li className="border-l-4 border-green-400 pl-4">
-                <strong>2025.10.28</strong> ・配信追加しました PEAK配信を追加しました ・更新頻度激落ちくん。
-              </li>
-              {/* 他のNEWSを続きでコピー */}
+        <motion.div
+          className="absolute w-96 h-96 bg-accent/30 rounded-full blur-3xl -z-10"
+          animate={{ x: [0, 100, -100, 0], y: [0, -100, 100, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        />
+      </section>
+
+      {/* 活動内容セクション */}
+      <section id="活動内容" className="about-bg py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <motion.h2
+            className="text-5xl md:text-6xl font-bold text-accent text-center mb-20"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            活動内容
+          </motion.h2>
+          <div className="grid md:grid-cols-3 gap-12">
+            {[
+              { title: "Vtuber活動", img: "/images/Image-1.jpeg", text: "2021年デビュー。ゲーム実況・雑談・歌枠など、明るく元気な配信でみんなを笑顔に！" },
+              { title: "イラストレーター", img: "/images/Image-2.jpeg", text: "可愛くて独特なタッチのイラストが大人気。ファンアートもたくさんもらってます！" },
+              { title: "うたってみた", img: "/images/Image-3.jpeg", text: "透き通る歌声でアニメソングからボカロまで。心に染みる歌唱力…" },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                className="glass p-8 rounded-3xl text-center"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-accent-light">
+                  <Image src={item.img} alt={item.title} fill className="object-cover" />
+                </div>
+                <h3 className="text-3xl font-bold text-accent mb-4">{item.title}</h3>
+                <p className="text-lg leading-relaxed opacity-90">{item.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 投稿動画セクション（以下同文） */}
+      <section id="投稿動画" className="works-bg py-32">
+        <div className="max-w-7xl mx-auto px-8">
+          <motion.h2 className="text-5xl md:text-6xl font-bold text-accent text-center mb-20" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+            投稿動画
+          </motion.h2>
+          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            {[
+              { title: "ハロウィン×グミ＝お祭り", video: "https://www.youtube.com/embed/iY6u2zJ9X78" },
+              { title: "アルピニストとしてのプライド", video: "https://www.youtube.com/embed/FJ-lsDIjono" },
+              { title: "食事を楽しみましょう", video: "https://www.youtube.com/embed/z1HCukNoFFE" },
+              { title: "悲鳴はリスナーの栄養", video: "https://www.youtube.com/embed/f2vSnWngjJY" },
+            ].map((item, i) => (
+              <motion.div key={i} className="glass p-8 rounded-3xl" initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.15 }} viewport={{ once: true }}>
+                <h3 className="text-2xl font-bold text-accent mb-6 text-center">{item.title}</h3>
+                <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                  <iframe width="100%" height="100%" src={item.video} title={item.title} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full"></iframe>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NEWS・Links・フッター */}
+      <section id="NEWS" className="contact-bg py-32">
+        <div className="max-w-4xl mx-auto px-8 text-center">
+          <motion.h2 className="text-5xl md:text-6xl font-bold text-accent mb-20" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+            NEWS
+          </motion.h2>
+          <motion.div className="glass p-12 rounded-3xl text-left text-lg leading-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+            <ul className="space-y-6">
+              <li><span className="text-accent font-bold">2025.11.11</span> ・化野ネコさん、ついにNext.jsで葱野みや公式超えのファンサイト完成させる</li>
+              <li><span className="text-accent font-bold">永遠</span> ・葱野みやは永遠に可愛い</li>
             </ul>
-          </div>
-        </section>
+          </motion.div>
+        </div>
+      </section>
 
-        <ChibiMiyaExplosion />
-      </main>
-    </Suspense>
-  );
+      <footer id="Links" className="py-24 text-center bg-black/20">
+        <div className="max-w-4xl mx-auto px-8">
+          <h2 className="text-5xl font-bold text-accent mb-16">Links</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { name: "YouTube", url: "https://www.youtube.com/@葱野みや", color: "bg-red-600" },
+              { name: "X（Twitter）", url: "https://x.com/Negi_008", color: "bg-black" },
+              { name: "マシュマロ", url: "https://marshmallow-qa.com/negi_008", color: "bg-pink-400" },
+              { name: "BOOTH", url: "https://neginomiya.booth.pm", color: "bg-orange-500" },
+            ].map((link) => (
+              <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
+                className={`${link.color} text-white py-6 rounded-2xl font-bold text-xl shadow-2xl hover:scale-110 transition-all block`}>
+                {link.name}
+              </a>
+            ))}
+          </div>
+          <p className="mt-20 text-lg opacity-80">
+            © 2025 葱野みや（本物）＆ 化野ネコ（ファンサイト作った人）<br />
+            後方ガッツポーズ組、いつもありがとう！
+          </p>
+        </div>
+      </footer>
+    </>
+  )
 }

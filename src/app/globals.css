@@ -1,48 +1,60 @@
 @import "tailwindcss";
 
-@layer base {
-  html {
-    font-family: 'Inter', sans-serif;
-  }
+@theme {
+  --color-bg-gradient: linear-gradient(to bottom, #e0f7fa, #a5d6a7, #e8f5e9);
+  --color-text: #1a2a2a;
+  --color-accent: #4caf50;
+  --color-accent-light: #81c784;
+  --color-glass: rgba(255, 255, 255, 0.68);
+  --color-glass-border: rgba(255, 255, 255, 0.35);
+  --color-section-1: rgba(224, 247, 250, 0.88);
+  --color-section-2: rgba(165, 214, 167, 0.78);
+  --color-section-3: rgba(232, 245, 233, 0.85);
+  --color-section-4: rgba(240, 250, 220, 0.82);
 }
 
-@layer components {
-  .scramble-text {
-    animation: scramble 0.3s infinite;
-  .animate-ping {
-    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-  @keyframes ping {
-    75%, 100% {
-      transform: scale(2);
-      opacity: 0;
-    }
-  }
-
-  }
-  @keyframes scramble {
-    0% { text-shadow: 0 0 10px rgba(0,255,0,0.8); transform: translate(0, 0); }
-    50% { text-shadow: 0 0 30px rgba(0,255,0,1); transform: translate(2px, -2px); }
-    100% { text-shadow: 0 0 10px rgba(0,255,0,0.8); transform: translate(0, 0); }
-  }
-  .parallax-bg {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  .chibi-click {
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .chibi-click:hover {
-    transform: scale(1.1);
-  }
+/* 全体背景（v4ではhtmlに直接当てられる） */
+html {
+  min-height: 100vh;
+  background-image: var(--color-bg-gradient);
+  color: var(--color-text);
+  font-family: system-ui, sans-serif;
 }
 
-/* モバイル対応 */
-@media (max-width: 768px) {
-  .parallax-bg {
-    background-attachment: scroll;
-  }
+/* ガラスモーフィズム（これだけで最強） */
+.glass {
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-8px);
+  box-shadow: 0 24px 48px rgba(76, 175, 80, 0.18);
+}
+
+/* セクションごとの透明背景 */
+.hero-bg     { background: var(--color-section-1); }
+.about-bg    { background: var(--color-section-2); }
+.works-bg    { background: var(--color-section-3); }
+.contact-bg  { background: var(--color-section-4); }
+
+/* アクセント文字 */
+.text-accent { color: var(--color-accent); }
+.text-accent-light { color: var(--color-accent-light); }
+
+/* ヘッダー透明化（v4でもこれでOK） */
+header {
+  transition: all 0.5s ease;
+}
+
+header.scrolled {
+  @apply bg-white/75;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
